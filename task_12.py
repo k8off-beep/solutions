@@ -15,10 +15,13 @@ class Dessert:
     def set_calories(self, calories):
         self._calories = calories
 
+    name = property(get_name, set_name)
+    calories = property(get_calories, set_calories)
+
     def is_healthy(self):
         if self._calories is None:
             return False
-        return self._calories < 200
+        return float(self._calories) < 200
 
     def is_delicious(self):
         return True
@@ -35,7 +38,10 @@ class JellyBean(Dessert):
     def set_flavor(self, flavor):
         self._flavor = flavor
 
+    flavor = property(get_flavor, set_flavor)
+
     def is_delicious(self):
         if self._flavor == 'black licorice':
             return False
+
         return True
