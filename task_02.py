@@ -1,13 +1,15 @@
-
-def coincidence(list=None,a=None,b=None):
-    if list == None or a == None or b == None:
+def coincidence(lst=None, range_obj=None):
+    if lst is None or range_obj is None:
         return []
-    spisak=[]
-    for i in range(len(list)):
-            if isinstance(list[i],(int,float)) and not isinstance(list[i], bool):
-                if a <= list[i] < b:
-                    spisak.append(list[i])
-    return spisak
-print(coincidence([1, 2 , 3, 4, 5],3,6))
-print(coincidence())
-print(coincidence([True, None, 1, 'foo',4, 2, 2.5],1, 4))
+    
+    result = []
+    
+    for item in lst:
+        if isinstance(item, (int, float)) and not isinstance(item, bool):
+            if range_obj.start <= item < range_obj.stop:
+                result.append(item)
+    
+    return result
+print(coincidence([1, 2, 3, 4, 5], range(3, 6)))  # => [3, 4, 5]
+print(coincidence())  # => []
+print(coincidence([None, 1, 'foo', 4, 2, 2.5], range(1, 4)))  # => [1, 2, 2.5]
