@@ -1,34 +1,34 @@
-players = [['player1', 'P'], ['player2', 'S']]
 class WrongNumberOfPlayersError(Exception):
     pass
 
 class NoSuchStrategyError(Exception):
     pass
 
-def rps_game_winner(lst):
-    if len(lst) != 2:
+def rps_game_winner(players):
+    if isinstance(players, tuple) and len(players) == 1:
+        players = players[0]
+    
+    if len(players) != 2:
         raise WrongNumberOfPlayersError
-    if lst[0][1] not in 'PSR' or lst[1][1] not in 'PSR':
+    
+    p1_name, p1_move = players[0]
+    p2_name, p2_move = players[1]
+    
+    valid_moves = {'R', 'P', 'S'}
+    if p1_move not in valid_moves or p2_move not in valid_moves:
         raise NoSuchStrategyError
-    if lst[0][1] == lst[1][1]:
-        #print(f'{lst[0][0]} {lst[0][1]}')
-        print('Player 1 is winner')
-    if lst[0][1] == 'P' and lst[1][1] == 'S':
-        print('Player 2 is winner')
-    if lst[0][1] == 'S' and lst[1][1] == 'P':
-        print('Player 1 is winner')
-    if lst[0][1] == 'P' and lst[1][1] == 'R':
-        print('Player 1 is winner')
-    if lst[0][1] == 'R' and lst[1][1] == 'P':
-        print('Player 2 is winner')
-    if lst[0][1] == 'S' and lst[1][1] == 'R':
-        print('Player 2 is winner')
-    if lst[0][1] == 'R' and lst[1][1] == 'S':
-        print('Player 1 is winner')
+    
+    win_conditions = {
+        'R': 'S', 
+        'S': 'P', 
+        'P': 'R'   
+    }
+    
+    if p1_move == p2_move:
+        return f"{p1_name} {p1_move}"
+    
+    if win_conditions[p1_move] == p2_move:
+        return f"{p1_name} {p1_move}"
+    else:
+        return f"{p2_name} {p2_move}"
 
-
-
-
-rps_game_winner([['player1', 'P'], ['player2', 'S']])
-
-rps_game_winner([['player1', 'P'], ['player2', 'P']])
