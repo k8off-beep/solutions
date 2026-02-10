@@ -15,6 +15,9 @@ class Dessert:
     def set_calories(self, calories):
         self._calories = calories
 
+    name = property(get_name, set_name)
+    calories = property(get_calories, set_calories)
+
     def is_healthy(self):
         if self._calories is None:
             return False
@@ -31,4 +34,5 @@ dessert.set_name('Пирог')
 print(dessert.get_name())
 dessert.set_calories(200)
 print(dessert.get_calories())  # 180
+
 print(dessert.is_healthy())  # True
