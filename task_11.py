@@ -21,18 +21,9 @@ class Dessert:
     def is_healthy(self):
         if self._calories is None:
             return False
-        return self._calories < 200
+        if isinstance(self._calories, (int, float)):
+            return self._calories < 200
+        return False
 
     def is_delicious(self):
         return True
-
-
-dessert = Dessert("Печенье", 120)
-print(dessert.is_healthy())
-print(dessert.get_name())  # Печенье
-dessert.set_name('Пирог')
-print(dessert.get_name())
-dessert.set_calories(200)
-print(dessert.get_calories())  # 180
-
-print(dessert.is_healthy())  # True
