@@ -21,7 +21,10 @@ class Dessert:
     def is_healthy(self):
         if self._calories is None:
             return False
-        return float(self._calories) < 200
+        try:
+            return float(self._calories) < 200
+        except (ValueError, TypeError):
+            return False
 
     def is_delicious(self):
         return True
